@@ -3,7 +3,7 @@ import EditProfileComp from "../EditProfileComp";
 import { getUserData } from "@/APIs/user/user";
 import { handleUpdateProfile } from "@/APIs/user/user";
 import ProfilePic from "../ProfilePic";
-
+import {convertDateToMonthAndYear} from "@/utils/date"
 type UserProfile = {
   id: number;
   username: string;
@@ -30,15 +30,7 @@ const ProfileComp = () => {
     });
   }, []);
 
-  const convertDateToMonthAndYear = (date: string | undefined): string => {
-    if (!date) {
-      return "N/A";
-    }
-    return new Date(date).toLocaleDateString("en-US", {
-      month: "long",
-      year: "numeric",
-    });
-  };
+
   const handleSave = async () => {
     handleUpdateProfile(tempFirstName, tempLastName).then((res) => {
       if (res) {

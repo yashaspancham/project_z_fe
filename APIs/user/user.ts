@@ -13,6 +13,8 @@ export const getUserData = async () => {
         return false;
     }
 }
+
+
 export const uploadProfilePic = async (file: File) => {
     if (!iSImage(file.name.split(".").pop()?.toLowerCase())) {
         toasting("not an Image", "error");
@@ -51,6 +53,7 @@ export const deleteProfilePic = async () => {
     }
 }
 
+
 export const getProfilePic = async () => {
     try {
         const response=await api.get("users/get_profile_pic/");
@@ -61,6 +64,7 @@ export const getProfilePic = async () => {
         return false;
     }
 }
+
 
 export const handleUpdateProfile = async (firstNameInput:string,lastNameInput:string) => {
   try {
