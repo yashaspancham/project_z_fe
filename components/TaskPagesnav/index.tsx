@@ -13,7 +13,6 @@ const TaskPagesButton = ({ taskDetails }: any) => {
     setLoaded(true);
   }, []);
   const urlForSearchAndSort = (): string => {
-    console.log("taskDetails.next_page: ", taskDetails.next_page);
     let urlEnd: string =
       taskDetails.next_page !== null
         ? taskDetails.next_page
@@ -23,12 +22,10 @@ const TaskPagesButton = ({ taskDetails }: any) => {
     }
     urlEnd = urlEnd.split("?")[1];
     let urlEndTemp = urlEnd.split("&");
-    console.log("urlEndTemp: ");
     urlEnd =
       urlEndTemp.length === 3
         ? urlEndTemp[0] + "&" + urlEndTemp[1] + "&" + urlEndTemp[2]
         : urlEndTemp[1] + "&" + urlEndTemp[2] + "&" + urlEndTemp[3];
-    console.log("urlEnd: ", urlEnd);
     return urlEnd;
   };
   return (
@@ -57,7 +54,6 @@ const TaskPagesButton = ({ taskDetails }: any) => {
                     window.location.href = `${url}?page=${
                       i + 1
                     }&${urlForSearchAndSort()}`;
-                    // console.log(`${url}?page=${i + 1}&${urlForSearchAndSort()}`);
                   }
                 }}
                 className={`hover:cursor-pointer rounded-[50%] ${

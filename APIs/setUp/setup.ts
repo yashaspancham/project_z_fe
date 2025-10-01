@@ -29,7 +29,6 @@ api.interceptors.request.use(config => {
 api.interceptors.response.use(
   response => response,
   async error => {
-    //  console.log("Interceptor caught an error:", error);
     const originalRequest = error.config;
 
     if (error.response?.status === 401 && !originalRequest._retry) {
@@ -48,7 +47,6 @@ api.interceptors.response.use(
       return new Promise(async (resolve, reject) => {
         try {
           const refresh =localStorage.getItem("refresh");
-          console.log("Calling refresh token endpoint");
           const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE}users/refresh_access/`, { refresh });
           const newAccess = res.data.access;
           const newRefresh=res.data.refresh;
@@ -62,7 +60,6 @@ api.interceptors.response.use(
           processQueue(null, newAccess);
           resolve(api(originalRequest));
         } catch (err) {
-          console.log("err: ", err);
           if (err && err.status === 401) {
             window.location.href = "/sign-in";
           }

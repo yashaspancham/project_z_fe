@@ -42,7 +42,6 @@ const TaskComponent = ({
           onClick={() => {
             setEntryID(item.id);
             handleConfirmDeletePopUp();
-            console.log("delete item.id: ", item.id);
           }}
           className="hover:cursor-pointer hover:bg-gray-200 text-white w-fit p-1.5 rounded-lg"
         >

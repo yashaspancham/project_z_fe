@@ -34,7 +34,6 @@ const ProfileComp = () => {
   const handleSave = async () => {
     handleUpdateProfile(tempFirstName, tempLastName).then((res) => {
       if (res) {
-        console.log("handleUpdateProfile-res: ", res);
         setFirstName(res.first_name);
         setLastName(res.last_name);
       }

@@ -11,7 +11,6 @@ export const signup = async (email: string, password: string) => {
     return response.data;
   } catch (err: any) {
     toasting(`Error creating account ${err}`, "error");
-    console.log(err.response?.data?.error || "Signup failed");
     return null;
   }
 };
@@ -21,12 +20,11 @@ export const signin = async (email: string, password: string) => {
   try {
     const response = await axios.post(`${api_base}signin/`, { email, password });
     toasting("Signin success", "success");
-    console.log("signin-response: ", response.data);
     localStorage.setItem("access", response.data.tokens.access);
     localStorage.setItem("refresh", response.data.tokens.refresh);
     return response.data.tokens;
   } catch (err: any) {
-    console.log(err.response?.data?.error || "Signin failed");
+    toasting(`error in Signin: ${err}`,"error")
     return null;
   }
 };

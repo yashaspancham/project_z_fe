@@ -41,8 +41,7 @@ export const getAllEntries = async (page: number = 1,sort:string,search:string="
         });
         return response.data;
     } catch (error: any) {
-        console.log("Error loading entries", error);
-        toasting("Error loading entries", "error");
+        toasting(`Error loading entries: ${error}`, "error");
         return { entries: [], total_pages: 0, current_page: 1 };
     }
 };
@@ -53,11 +52,9 @@ export const getEntryById = async (entry_id: number) => {
         const response = await api.get(`${apiBaseURL}journal/getEntryById`, {
             params: { "entry_id": entry_id }
         });
-        console.log("getEntryById-res: ",response.data);
         return response.data;
     }
     catch (error: any) {
-        console.log("error: ",error);
         toastControl("Error Obtaining entry","error");
         return null;
     }
@@ -78,7 +75,6 @@ export const deleteEntry=async(entry_id: number,confirmationText:string)=>{
     }
     catch(error:any){
         toasting("Error deleting entry","error");
-        console.log("error: ",error);
         return false;
     }
 }

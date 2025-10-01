@@ -58,7 +58,6 @@ const PagesNavEntries = ({ entriesDetails }: any) => {
                     window.location.href = `${url}?page=${
                       i + 1
                     }&${urlForSearchAndSort()}`;
-                    // console.log(`${url}?page=${i + 1}&${urlForSearchAndSort()}`);
                   }
                 }}
                 className={`hover:cursor-pointer rounded-[50%] ${

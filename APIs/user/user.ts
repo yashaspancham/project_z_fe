@@ -5,7 +5,6 @@ import { iSImage } from "@/utils/images";
 export const getUserData = async () => {
     try {
         const response = await api.get(`users/get_user_profile/`);
-        console.log("getUserData-response.data: ", response.data);
         return response.data;
     }
     catch (err: any) {

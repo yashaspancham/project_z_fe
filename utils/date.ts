@@ -9,20 +9,20 @@ export const convertDateToMonthAndYear = (date: string | undefined): string => {
 };
 
 export const convertDateToFullString = (date: string | undefined): string => {
-  if (!date) return "N/A";
+    if (!date) return "N/A";
 
-  const d = new Date(date);
+    const d = new Date(date);
 
-  const options: Intl.DateTimeFormatOptions = {
-    weekday: "long",    // e.g., Monday
-    day: "numeric",     // e.g., 1
-    month: "long",      // e.g., October
-    year: "numeric",    // e.g., 2025
-    hour: "numeric",    // e.g., 3 PM
-    minute: "numeric",  // e.g., 45
-    second: "numeric",  // optional, e.g., 30
-    hour12: true,       // 12-hour format
-  };
+    const options: Intl.DateTimeFormatOptions = {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hour12: true,
+    };
 
-  return d.toLocaleString("en-US", options);
+    return d.toLocaleString("en-US", options);
 };

@@ -17,7 +17,6 @@ const EntrySideBar = ({
 
     useEffect(() => {
         getAllImages().then((res) => {
-            console.log("getAllImages-res: ", res.files);
             setUrlList(res.files);
         });
     }, [])

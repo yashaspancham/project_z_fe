@@ -8,18 +8,15 @@ export const getTasks = async (pageNumber: number, sort: string, search: string,
     try {
         const response = await api.get(`${apiBase}get_tasks/`,
             { params: { page: pageNumber, sort: sort, search: search, status:statusFilter } });
-        console.log("getTasks-response: ", response.data);
         return response.data;
     }
     catch (error: any) {
-        console.log("Error loading tasks", error);
-        toasting("Error loading tasks", "error");
+        toasting( `Error loading tasks: ${error}`, "error");
         return [];
     }
 }
 
 export const addTask = async (taskData:any) => {
-  console.log("taskData: ",taskData);
   try {
     await api.post(`${apiBase}add_task/`, taskData);
     toasting("Task added successfully", "success");
