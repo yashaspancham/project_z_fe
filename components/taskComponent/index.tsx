@@ -12,7 +12,7 @@ const TaskComponent = ({
       className={`p-4 ${getColorForTask(
         item.status,
         item.dueDate
-      )} rounded-lg w-[200px] h-[200px] hover:cursor-pointer hover:shadow-md transition-shadow duration-300 ease-in-out flex flex-col`}
+      )} rounded-lg w-[200px] h-[200px] hover:shadow-md transition-shadow duration-300 ease-in-out flex flex-col`}
     >
       <p className="text-gray-900 h-[100px] max-h-[100px] overflow-hidden">
         {item.description}
@@ -42,7 +42,6 @@ const TaskComponent = ({
           onClick={() => {
             setEntryID(item.id);
             handleConfirmDeletePopUp();
-            console.log("delete item.id: ", item.id);
           }}
           className="hover:cursor-pointer hover:bg-gray-200 text-white w-fit p-1.5 rounded-lg"
         >

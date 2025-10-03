@@ -39,7 +39,6 @@ const TaskSortButtons = ({
     setLoading(true);
     const pageStr = searchParams.get("page");
     const pageNumber = pageStr ? Number(pageStr) : 1;
-    console.log("currentSort: ", currentSort);
     const search = searchParams.get("search") || "";
     const status = searchParams.get("status") || "";
     getTasks(pageNumber, currentSort, search, status).then((res) => {

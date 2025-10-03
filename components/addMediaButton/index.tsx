@@ -27,11 +27,10 @@ const AddMediaButton: React.FC<AddMediaButtonProps> = ({ setUrlList }) => {
     };
     setDisableButton(true);
     const result = await uploadToS3(file);
-    console.log("Uploaded file:", result);
     if (result !== undefined) {
       setUrlList((prev: any) => [...prev, result])
-      setDisableButton(false);
     }
+    setDisableButton(false);
   };
 
   return (

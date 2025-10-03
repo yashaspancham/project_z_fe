@@ -1,4 +1,4 @@
-import axios from "axios";
+import {api} from "@/APIs/setUp/setup"
 import { toastControl, toasting } from "@/utils/toast";
 
 const apiBaseURL = process.env.NEXT_PUBLIC_API_BASE;
@@ -6,7 +6,7 @@ const apiBaseURL = process.env.NEXT_PUBLIC_API_BASE;
 export const savingEntry = async (editorContent: string) => {
     const toastId = toastControl("loading", "Creating Entry...");
     try {
-        const res = await axios.post(`${apiBaseURL}journal/createEntry/`, { content: editorContent })
+        const res = await api.post(`journal/createEntry/`, { content: editorContent })
         toastControl("success", "Entry created Successfull!", toastId);
         return { "success": true, "entry_id": res.data.entry_id };
     }
@@ -21,7 +21,7 @@ export const savingEntry = async (editorContent: string) => {
 export const updateEntry = async (diff: string, entryID: Number | null) => {
     const toastId = toastControl("loading", "Saving content...");
     try {
-        await axios.post(`${apiBaseURL}journal/updateEntry/`, { "content": diff, "entry_id": entryID })
+        await api.post(`${apiBaseURL}journal/updateEntry/`, { "content": diff, "entry_id": entryID })
         toastControl("success", "Save Successfull!", toastId);
         return true;
     }
@@ -34,14 +34,14 @@ export const updateEntry = async (diff: string, entryID: Number | null) => {
 
 
 export const getAllEntries = async (page: number = 1,sort:string,search:string="") => {
+
     try {
-        const response = await axios.get(`${apiBaseURL}journal/getAllEntries/`, {
+        const response = await api.get(`${apiBaseURL}journal/getAllEntries/`, {
             params: { page, sort,search },
         });
         return response.data;
     } catch (error: any) {
-        console.log("Error loading entries", error);
-        toasting("Error loading entries", "error");
+        toasting(`Error loading entries: ${error}`, "error");
         return { entries: [], total_pages: 0, current_page: 1 };
     }
 };
@@ -49,14 +49,12 @@ export const getAllEntries = async (page: number = 1,sort:string,search:string="
 
 export const getEntryById = async (entry_id: number) => {
     try {
-        const response = await axios.get(`${apiBaseURL}journal/getEntryById`, {
+        const response = await api.get(`${apiBaseURL}journal/getEntryById`, {
             params: { "entry_id": entry_id }
         });
-        console.log("getEntryById-res: ",response.data);
         return response.data;
     }
     catch (error: any) {
-        console.log("error: ",error);
         toastControl("Error Obtaining entry","error");
         return null;
     }
@@ -69,7 +67,7 @@ export const deleteEntry=async(entry_id: number,confirmationText:string)=>{
         return false;
     }
     try{
-        await axios.delete(`${apiBaseURL}journal/deleteEntry/`,{
+        await api.delete(`${apiBaseURL}journal/deleteEntry/`,{
             params:{entry_id:entry_id}
         });
         toasting("Successfully deleted entry","success");
@@ -77,7 +75,6 @@ export const deleteEntry=async(entry_id: number,confirmationText:string)=>{
     }
     catch(error:any){
         toasting("Error deleting entry","error");
-        console.log("error: ",error);
         return false;
     }
 }

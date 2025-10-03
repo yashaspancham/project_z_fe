@@ -29,12 +29,12 @@ const SideBarMenu = () => {
       pageName: "Tasks",
       altText: "Tasks Icon",
     },
-    {
-      logoSrc: "/icons/calendarIcon.png",
-      path: "/calender",
-      pageName: "Calender",
-      altText: "Calender Icon",
-    },
+    // {
+    //   logoSrc: "/icons/calendarIcon.png",
+    //   path: "/calender",
+    //   pageName: "Calender",
+    //   altText: "Calender Icon",
+    // },
   ];
   const handleRoutes = (currentPath: string, newPath: string) => {
     if (currentPath !== newPath) {
