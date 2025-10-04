@@ -1,4 +1,4 @@
-import { toast,type ToastId } from "react-toastify";
+import { toast, type Id } from "react-toastify";
 
 export const toasting = (msg: string, type: string) => {
   if (type === "info") {
@@ -64,7 +64,7 @@ export const toasting = (msg: string, type: string) => {
 };
 
 
-export const toastControl = (type:string, msg?: string, toastId?: ToastId) => {
+export const toastControl = (type: string, msg?: string, toastId?: Id) => {
   if (type === "loading") {
     const id = toast.info(msg || "Loading...", {
       position: "top-center",
@@ -77,10 +77,10 @@ export const toastControl = (type:string, msg?: string, toastId?: ToastId) => {
     return id;
   }
 
-  if (type === "success") {
+  if (type === "success" && toastId !== undefined) {
     toast.update(toastId, {
       render: msg,
-      type:"success",
+      type: "success",
       autoClose: 3000,
       closeOnClick: true,
       draggable: true,
@@ -88,10 +88,10 @@ export const toastControl = (type:string, msg?: string, toastId?: ToastId) => {
     });
   }
 
-    if (type === "error") {
+  if (type === "error" && toastId !== undefined) {
     toast.update(toastId, {
       render: msg,
-      type:"error",
+      type: "error",
       autoClose: 3000,
       closeOnClick: true,
       draggable: true,

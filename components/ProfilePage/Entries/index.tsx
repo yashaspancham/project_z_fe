@@ -4,8 +4,31 @@ import { CiCalendar } from "react-icons/ci";
 import { getAllEntries } from "@/APIs/Entry/entry";
 import { useRouter } from "next/navigation";
 import { convertDateToFullString } from "@/utils/date";
+
+
+type Entry = {
+  id: number;
+  title: string;
+  content: string | null;
+  createdAt: string;
+  lastUpdated: string;
+  url: string | null;
+};
+
+type EntriesDetails = {
+  clamped: boolean;
+  current_page: number;
+  entries: Entry[];
+  next_page: number | null;
+  prev_page: number | null;
+  success: boolean;
+  total_entries: number;
+  total_pages: number;
+};
+
+
 const Entries = () => {
-  const [entries, setEntries] = useState([]);
+  const [entries, setEntries] = useState<Entry[]>([]);
   const router = useRouter();
   useEffect(() => {
     getAllEntries(1, "-lastUpdated", "").then((res) => {
