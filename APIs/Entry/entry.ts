@@ -1,4 +1,4 @@
-import {api} from "@/APIs/setUp/setup"
+import { api } from "@/APIs/setUp/setup"
 import { toastControl, toasting } from "@/utils/toast";
 
 const apiBaseURL = process.env.NEXT_PUBLIC_API_BASE;
@@ -33,12 +33,12 @@ export const updateEntry = async (diff: string, entryID: Number | null) => {
 }
 
 
-export const getAllEntries = async (page: number = 1,sort:string,search:string="") => {
-
+export const getAllEntries = async (page: number = 1, sort: string, search: string = "") => {
     try {
         const response = await api.get(`${apiBaseURL}journal/getAllEntries/`, {
-            params: { page, sort,search },
+            params: { page, sort, search },
         });
+        console.log(response.data);
         return response.data;
     } catch (error: any) {
         toasting(`Error loading entries: ${error}`, "error");
@@ -55,26 +55,26 @@ export const getEntryById = async (entry_id: number) => {
         return response.data;
     }
     catch (error: any) {
-        toastControl("Error Obtaining entry","error");
+        toastControl("Error Obtaining entry", "error");
         return null;
     }
-} 
+}
 
 
-export const deleteEntry=async(entry_id: number,confirmationText:string)=>{
-    if(confirmationText!=="delete entry"){
-        toasting("Please Enter Confirmation Text","error");
+export const deleteEntry = async (entry_id: number, confirmationText: string) => {
+    if (confirmationText !== "delete entry") {
+        toasting("Please Enter Confirmation Text", "error");
         return false;
     }
-    try{
-        await api.delete(`${apiBaseURL}journal/deleteEntry/`,{
-            params:{entry_id:entry_id}
+    try {
+        await api.delete(`${apiBaseURL}journal/deleteEntry/`, {
+            params: { entry_id: entry_id }
         });
-        toasting("Successfully deleted entry","success");
+        toasting("Successfully deleted entry", "success");
         return true;
     }
-    catch(error:any){
-        toasting("Error deleting entry","error");
+    catch (error: any) {
+        toasting("Error deleting entry", "error");
         return false;
     }
 }

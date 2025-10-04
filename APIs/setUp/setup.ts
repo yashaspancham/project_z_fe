@@ -1,12 +1,11 @@
 import axios from "axios";
-
+import { encryptString, decryptString } from "@/utils/encryptionAndDecryption";
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE,
 });
 
 let isRefreshing = false;
 let failedQueue: any[] = [];
-
 const processQueue = (error: any, token: string | null = null) => {
   failedQueue.forEach(prom => {
     if (error) {
@@ -46,12 +45,12 @@ api.interceptors.response.use(
 
       return new Promise(async (resolve, reject) => {
         try {
-          const refresh =localStorage.getItem("refresh");
+          const refresh = localStorage.getItem("refresh");
           const res = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE}users/refresh_access/`, { refresh });
           const newAccess = res.data.access;
-          const newRefresh=res.data.refresh;
+          const newRefresh = res.data.refresh;
           localStorage.setItem("access", newAccess);
-          if(newRefresh){
+          if (newRefresh) {
             localStorage.setItem("refresh", newRefresh);
           }
 
@@ -60,7 +59,7 @@ api.interceptors.response.use(
           processQueue(null, newAccess);
           resolve(api(originalRequest));
         } catch (err) {
-          if (err && err.status === 401) {
+          if (err) {
             window.location.href = "/sign-in";
           }
           processQueue(err, null);
