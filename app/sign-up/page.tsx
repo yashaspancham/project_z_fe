@@ -79,9 +79,9 @@ const SignUpPage = () => {
           Enter
         </button>
         <p>
-          regular? login{" "}
+          Already have an account?{" "}
           <Link href="/sign-in" className="underline text-blue-500">
-            here
+            Log in
           </Link>
         </p>
       </div>

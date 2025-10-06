@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  //  output: 'export',
     images: {
     domains: [
       "reflections-static-assets.s3.amazonaws.com"
