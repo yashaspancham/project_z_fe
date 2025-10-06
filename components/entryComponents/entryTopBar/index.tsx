@@ -22,7 +22,7 @@ const EntryTopBar = ({
         className="p-2 bg-blue-800 hover:bg-blue-700 rounded-lg text-white hover:cursor-pointer"
         onClick={() => router.push("/entries")}
       >
-        Return
+        Home
       </button>
       <button
         className={`${
@@ -148,7 +148,7 @@ const EntryTopBar = ({
 
       <button
         className={`p-2 ${
-          sideMenuBool ? "bg-gray-300" : "bg-purple-800 hover:bg-purple-700"
+          sideMenuBool ? "bg-gray-300" : "bg-blue-800 hover:bg-blue-700"
         } rounded-lg text-white hover:cursor-pointer`}
         onClick={() => setSideMenuBool(true)}
       >

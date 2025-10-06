@@ -40,10 +40,10 @@ const Entries = () => {
   return (
     <div className="w-full">
       <div className="flex items-center justify-between">
-        <p className="text-xl text-purple-700 font-bold">Recent Entries</p>
+        <p className="text-xl text-emerald-700 font-bold">Recent Entries</p>
         <button
           onClick={() => router.push("/entries")}
-          className="flex items-center gap-4 text-md hover:cursor-pointer hover:bg-purple-100 p-2 rounded-lg"
+          className="flex items-center gap-4 text-md hover:cursor-pointer hover:bg-blue-100 p-2 rounded-lg"
         >
           <p>View All Entries</p>
           <FaArrowRight color="gray" />
@@ -51,14 +51,14 @@ const Entries = () => {
       </div>
       <div className="flex flex-col gap-4 mt-5">
         {entries.map((item, key) => (
-          <div key={key} className="p-5 bg-purple-50 rounded-lg hover:shadow-[2px_4px_1px_0px_rgba(191,151,242,0.75)]">
+          <div key={key} className="p-5 bg-blue-50 rounded-lg hover:shadow-[2px_4px_1px_0px_rgba(59,130,246,0.75)] transition-shadow duration-300 ease-in-out">
             <div className="flex items-center justify-between">
               <p className="text-xl lg:text-2xl">{item?.title}</p>
               <button
                 onClick={() => router.push(`/entry?entry_id=${item?.id}`)}
-                className="hover:cursor-pointer hover:bg-purple-100 p-2 rounded"
+                className="hover:cursor-pointer hover:bg-blue-100 p-2 rounded"
               >
-                <FaArrowRight color="purple" />
+                <FaArrowRight color="blue" />
               </button>
             </div>
             <div className="flex gap-1 items-center">

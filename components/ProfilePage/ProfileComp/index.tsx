@@ -43,7 +43,7 @@ const ProfileComp = () => {
   return (
     <div
       className="
-      w-full rounded-lg bg-fuchsia-100 min-h-20 p-2.5 lg:p-5
+      w-full rounded-lg bg-blue-100 min-h-20 p-2.5 lg:p-5
       flex min-[350px]:justify-between max-[350px]:flex-col max-[350px]:gap-5
     "
     >
@@ -60,10 +60,10 @@ const ProfileComp = () => {
         <ProfilePic />
         <div className="flex flex-col">
           <div className="flex max-[300px]:flex-col gap-2">
-            <p className="text-2xl text-purple-900">
+            <p className="text-2xl text-emerald-700">
               {firstName === "" ? "FirstName" : firstName}
             </p>
-            <p className="text-2xl text-purple-900">
+            <p className="text-2xl text-emerald-700">
               {lastName === "" ? "LastName" : lastName}
             </p>
           </div>
