@@ -150,8 +150,8 @@ const TasksSideMenu = ({
             <button
               onClick={() => {
                 {
-                  setSelectedTask(null);
                   setSideMenuBool(false);
+                  setSelectedTask(null);
                 }
               }}
               className="hover:cursor-pointer hover:bg-red-700 bg-red-600 p-3 rounded-lg"

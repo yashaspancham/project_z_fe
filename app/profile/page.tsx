@@ -42,8 +42,7 @@ const ProfilePage = () => {
               <Entries />
             </div>
             <div className="flex flex-col max-lg:flex-row max-lg:flex-wrap max-lg:justify-center">
-              <ProfileStats stats={Entrystats} />
-              <ProfileStats stats={taskStats} />
+              <ProfileStats stats={{...Entrystats, ...taskStats}} />
               <div className="m-5 p-5 w-[250px] bg-[#fcfcff] rounded">
                 <p className="text-xl">This Week's Mood</p>
                 <p className="text-purple-800">Cooming Soon</p>

@@ -83,7 +83,7 @@ const TasksPageComp = () => {
           {loading ? (
             <LoadingTasks />
           ) : (
-            <div className="flex-1 w-full lg:p-16 md:p-12 sm:p-8 p-4 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 place-items-center gap-5">
+            <div className="flex-1 w-full lg:p-16 md:p-12 sm:p-8 p-4 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 max-lg:place-items-center gap-5">
               {tasks &&
                 tasks.map((item, index) => (
                   <TaskComponent
