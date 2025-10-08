@@ -56,7 +56,13 @@ const Entries = () => {
             className="p-5 bg-blue-50 rounded-lg hover:shadow-[2px_4px_1px_0px_rgba(59,130,246,0.75)] transition-shadow duration-300 ease-in-out"
           >
             <div className="flex items-center justify-between">
-              <p className="text-xl lg:text-2xl">{item?.title}</p>
+              <p
+                className="text-xl lg:text-2xl truncate w-[200px] sm:w-[250px] lg:w-[400px]"
+                title={item?.title}
+              >
+                {item?.title}
+              </p>
+
               <button
                 onClick={() => router.push(`/entry?entry_id=${item?.id}`)}
                 className="hover:cursor-pointer hover:bg-blue-100 p-2 rounded"
