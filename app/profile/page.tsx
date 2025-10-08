@@ -38,7 +38,6 @@ const ProfilePage = () => {
         <div className="w-full xl:p-20 lg:p-16 md:p-14 sm:p-10 p-5 mb-20">
           <ProfileComp />
           <div className="flex lg:flex-row flex-col">
-            {/* flex flex-col max-lg:flex-row max-lg:flex-wrap max-lg:justify-center*/}
             <div className="flex gap-5 flex-col items-center">
               <ProfileStats stats={{ ...Entrystats, ...taskStats }} />
               <div className="flex lg:flex-col max-lg:flex-row max-lg:flex-wrap justify-center gap-5">

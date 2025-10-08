@@ -1,9 +1,13 @@
+"use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import EditProfileComp from "../EditProfileComp";
 import { getUserData } from "@/APIs/user/user";
 import { handleUpdateProfile } from "@/APIs/user/user";
 import ProfilePic from "../ProfilePic";
-import {convertDateToMonthAndYear} from "@/utils/date"
+import { convertDateToMonthAndYear } from "@/utils/date";
+import ConfirmDeleteYesOrCancle from "@/components/ConfirmDeleteYesOrCancle/index";
+
 type UserProfile = {
   id: number;
   username: string;
@@ -20,6 +24,8 @@ const ProfileComp = () => {
   const [tempFirstName, setTempFirstName] = useState("");
   const [tempLastName, setTempLastName] = useState("");
   const [editProfilePopUp, setEditProfilePopUp] = useState(false);
+  const [confirmDeletePopUp, setConfirmDeletePopUp] = useState(false);
+  const router=useRouter();
   useEffect(() => {
     getUserData().then((res) => {
       if (res) {
@@ -30,7 +36,6 @@ const ProfileComp = () => {
     });
   }, []);
 
-
   const handleSave = async () => {
     handleUpdateProfile(tempFirstName, tempLastName).then((res) => {
       if (res) {
@@ -40,6 +45,10 @@ const ProfileComp = () => {
       setEditProfilePopUp(false);
     });
   };
+  const handleLogOut=()=>{
+    localStorage.clear();
+    router.push("/sign-in");
+  }
   return (
     <div
       className="
@@ -79,12 +88,25 @@ const ProfileComp = () => {
           </div>
         </div>
       </div>
-      <button
-        onClick={() => setEditProfilePopUp(true)}
-        className="bg-white p-2.5 rounded-lg self-start hover:cursor-pointer hover:bg-gray-50"
-      >
-        Edit profile
-      </button>
+      <div className="self-start flex gap-2">
+        <button
+          onClick={() => setEditProfilePopUp(true)}
+          className="bg-white p-2.5 rounded-lg  hover:cursor-pointer hover:bg-gray-50"
+        >
+          Edit profile
+        </button>
+        <button 
+        onClick={()=>setConfirmDeletePopUp(true)}
+        className="p-2.5 rounded-lg  hover:cursor-pointer bg-red-700 hover:bg-red-600 text-white">
+          Log Out
+        </button>
+      </div>
+      <ConfirmDeleteYesOrCancle
+      confirmDeletePopUp={confirmDeletePopUp}
+       setConfirmDeletePopUp={setConfirmDeletePopUp}
+        titleString={"Are you sure, you want to Log out?"}
+        onYes={handleLogOut}
+      />
     </div>
   );
 };

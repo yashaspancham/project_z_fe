@@ -1,5 +1,5 @@
 import axios from "axios";
-import { encryptString, decryptString } from "@/utils/encryptionAndDecryption";
+// import { encryptString, decryptString } from "@/utils/encryptionAndDecryption";
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE,
 });
