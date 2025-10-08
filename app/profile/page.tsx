@@ -37,25 +37,26 @@ const ProfilePage = () => {
         <SideBarMenu />
         <div className="w-full xl:p-20 lg:p-16 md:p-14 sm:p-10 p-5 mb-20">
           <ProfileComp />
-          <div className="flex lg:flex-row-reverse flex-col">
+          <div className="flex lg:flex-row flex-col">
+            <div className="flex gap-5 flex-col items-center">
+              <ProfileStats stats={{ ...Entrystats, ...taskStats }} />
+              <div className="flex lg:flex-col max-lg:flex-row max-lg:flex-wrap justify-center gap-5">
+                <div className="p-5 w-[250px] bg-[#fcfcff] rounded">
+                  <p className="text-xl">This Week's Mood</p>
+                  <p className="text-purple-800">Cooming Soon</p>
+                </div>
+                <div className="p-5 w-[250px] bg-[#fcfcff] rounded">
+                  <p className="text-xl">Request a feature</p>
+                  <p className="text-purple-800">Cooming Soon</p>
+                </div>
+                <div className="p-5 w-[250px] bg-[#fcfcff] rounded">
+                  <p className="text-xl">Buy Creator a Idle</p>
+                  <p className="text-purple-800">Cooming Soon</p>
+                </div>
+              </div>
+            </div>
             <div className="p-3">
               <Entries />
-            </div>
-            <div className="flex flex-col max-lg:flex-row max-lg:flex-wrap max-lg:justify-center">
-              <ProfileStats stats={Entrystats} />
-              <ProfileStats stats={taskStats} />
-              <div className="m-5 p-5 w-[250px] bg-[#fcfcff] rounded">
-                <p className="text-xl">This Week's Mood</p>
-                <p className="text-purple-800">Cooming Soon</p>
-              </div>
-              <div className="m-5 p-5 w-[250px] bg-[#fcfcff] rounded">
-                <p className="text-xl">Request a feature</p>
-                <p className="text-purple-800">Cooming Soon</p>
-              </div>
-              <div className="m-5 p-5 w-[250px] bg-[#fcfcff] rounded">
-                <p className="text-xl">Buy Creator a Idle</p>
-                <p className="text-purple-800">Cooming Soon</p>
-              </div>
             </div>
           </div>
         </div>

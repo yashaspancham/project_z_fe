@@ -5,10 +5,13 @@ import SideBarMenu from "@/components/SideBarMenu";
 import AddMediaButton from "@/components/addMediaButton";
 import { delete_iamge, downloadImage, getAllImages } from "@/APIs/S3/s3";
 import { toasting } from "@/utils/toast";
+import ConfirmDeleteYesOrCancle from "@/components/ConfirmDeleteYesOrCancle";
 
 const MediaPage = () => {
   const [urlList, setUrlList] = useState<any[]>([]);
   const [deleteButtonDisabled, setDeleteButtonDisabled] = useState(false);
+  const [confirmDeletePopUp, setConfirmDeletePopUp] = useState(false);
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string>("");
   useEffect(() => {
     getAllImages().then((res) => {
       setUrlList(res?.files ?? []);
@@ -47,6 +50,7 @@ const MediaPage = () => {
         });
       }
       setDeleteButtonDisabled(false);
+      setConfirmDeletePopUp(false);
     });
   };
   return (
@@ -105,15 +109,12 @@ const MediaPage = () => {
                       <button
                         disabled={deleteButtonDisabled}
                         onClick={() => {
-                          handleDeleteImage(item.url);
+                           setSelectedImageUrl(item.url);
+                          setConfirmDeletePopUp(true);
                         }}
                         className={`hover:cursor-pointer p-1 
-                                        ${
-                                          deleteButtonDisabled
-                                            ? "opacity-50"
-                                            : ""
-                                        }
-                                        `}
+                          ${deleteButtonDisabled ? "opacity-50" : ""}
+                          `}
                       >
                         <Image
                           src={"/icons/deleteIcon.png"}
@@ -130,6 +131,14 @@ const MediaPage = () => {
           )}
         </div>
       )}
+      <ConfirmDeleteYesOrCancle
+        confirmDeletePopUp={confirmDeletePopUp}
+        setConfirmDeletePopUp={setConfirmDeletePopUp}
+        titleString={"Are you sure you want to delete this image?"}
+        onYes={() => {
+          handleDeleteImage(selectedImageUrl);
+        }}
+      />
     </div>
   );
 };

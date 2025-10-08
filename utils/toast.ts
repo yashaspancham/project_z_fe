@@ -3,7 +3,7 @@ import { toast, type Id } from "react-toastify";
 export const toasting = (msg: string, type: string) => {
   if (type === "info") {
     toast.info(msg, {
-      position: "top-center",
+      position: "bottom-center",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: false,
@@ -15,7 +15,7 @@ export const toasting = (msg: string, type: string) => {
   }
   if (type === "success") {
     toast.success(msg, {
-      position: "top-center",
+      position: "bottom-center",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: false,
@@ -27,7 +27,7 @@ export const toasting = (msg: string, type: string) => {
   }
   if (type === "warning") {
     toast.warning(msg, {
-      position: "top-center",
+      position: "bottom-center",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: false,
@@ -39,7 +39,7 @@ export const toasting = (msg: string, type: string) => {
   }
   if (type === "error") {
     toast.error(msg, {
-      position: "top-center",
+      position: "bottom-center",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: false,
@@ -51,7 +51,7 @@ export const toasting = (msg: string, type: string) => {
   }
   if (type === "default") {
     toast(msg, {
-      position: "top-center",
+      position: "bottom-center",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: false,
@@ -67,7 +67,7 @@ export const toasting = (msg: string, type: string) => {
 export const toastControl = (type: string, msg?: string, toastId?: Id) => {
   if (type === "loading") {
     const id = toast.info(msg || "Loading...", {
-      position: "top-center",
+      position: "bottom-center",
       autoClose: false,
       closeOnClick: false,
       draggable: false,

@@ -85,20 +85,20 @@ const TasksSideMenu = ({
   return (
     loaded &&
     sideMenuBool && (
-      <div className="fixed z-10 bg-white border-l-2 border-purple-900 max-sm:w-full lg:p-16 md:p-12 p-8 h-full right-0 top-0">
+      <div className="fixed z-10 bg-white border-l-2 border-blue-900 max-sm:w-full lg:p-16 md:p-12 p-8 h-full right-0 top-0">
         <div className="bg-white flex flex-col gap-10">
           <div className="flex flex-col gap-5">
-            <p className="text-purple-900 text-center text-xl">Add task</p>
+            <p className="text-emerald-700 text-center text-xl">Add task</p>
             <textarea
               value={task}
               onChange={(e) => handleTaskWriting(e.target.value)}
               placeholder="Add a new task..."
-              className="placeholder-purple-400 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="placeholder-blue-400 w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               rows={6}
             />
           </div>
           <div className="flex flex-col gap-5">
-            <p className="text-purple-900 text-center text-xl">Finish By</p>
+            <p className="text-emerald-700 text-center text-xl">Finish By</p>
             <DatePicker
               selected={finishDate}
               onChange={(date) => {
@@ -107,7 +107,7 @@ const TasksSideMenu = ({
               minDate={new Date(new Date().setDate(new Date().getDate() + 2))}
               dateFormat="dd-MM-yyyy"
               placeholderText="Pick a date"
-              className="placeholder-purple-400 w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="placeholder-blue-400 w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -116,8 +116,8 @@ const TasksSideMenu = ({
               onClick={() => setTaskStatus("pending")}
               className={`rounded-lg p-2 hover:cursor-pointer ${
                 taskStatus === "pending"
-                  ? "bg-purple-600 hover:bg-purple-700 text-white"
-                  : "hover:bg-purple-100"
+                  ? "bg-blue-800 hover:bg-blue-700 text-white"
+                  : "hover:bg-blue-100"
               }`}
             >
               Pending
@@ -126,8 +126,8 @@ const TasksSideMenu = ({
               onClick={() => setTaskStatus("in_progress")}
               className={`rounded-lg p-2 hover:cursor-pointer ${
                 taskStatus === "in_progress"
-                  ? "bg-purple-600 hover:bg-purple-700 text-white"
-                  : "hover:bg-purple-100"
+                  ? "bg-blue-800 hover:bg-blue-700 text-white"
+                  : "hover:bg-blue-100"
               }`}
             >
               In-Process
@@ -137,8 +137,8 @@ const TasksSideMenu = ({
                 onClick={() => setTaskStatus("completed")}
                 className={`rounded-lg p-2 hover:cursor-pointer ${
                   taskStatus === "completed"
-                    ? "bg-purple-600 hover:bg-purple-700 text-white"
-                    : "hover:bg-purple-100"
+                    ? "bg-blue-800 hover:bg-blue-700 text-white"
+                    : "hover:bg-blue-100"
                 }`}
               >
                 Completed
@@ -150,8 +150,8 @@ const TasksSideMenu = ({
             <button
               onClick={() => {
                 {
-                  setSelectedTask(null);
                   setSideMenuBool(false);
+                  setSelectedTask(null);
                 }
               }}
               className="hover:cursor-pointer hover:bg-red-700 bg-red-600 p-3 rounded-lg"
@@ -162,7 +162,7 @@ const TasksSideMenu = ({
               onClick={() => {
                 handleTaskUpdate();
               }}
-              className="hover:cursor-pointer hover:bg-purple-700 bg-purple-600 p-3 rounded-lg"
+              className="hover:cursor-pointer hover:bg-blue-700 bg-blue-800 p-3 rounded-lg"
             >
               Save
             </button>

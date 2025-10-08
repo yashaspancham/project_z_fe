@@ -32,7 +32,6 @@ import EntrySideBar from "@/components/entryComponents/selectAnImage";
 import TasksSideMenu from "@/components/taskSideMenu";
 import ConfirmDeletePopUp from "@/components/entryComponents/ConfirmDeletePopUp";
 
-
 const EntryPageComp = () => {
   const [oldHTML, setOldHTML] = useState("");
   const [sideBarBool, setSideBarBool] = useState(false);
@@ -77,7 +76,7 @@ const EntryPageComp = () => {
         getEntryById(entry_id).then((res: any) => {
           if (res && editor) {
             setOldHTML(res.entryContent);
-            editor.commands.setContent(res.entryContent);
+            editor.commands.setContent(res.entryContent,{emitUpdate:false}); ;
           }
         });
       }

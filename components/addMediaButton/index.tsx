@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { usePathname } from "next/navigation";
-import { getColor } from "@/utils/getColorForSideMenu";
-import { uploadToS3 } from "@/APIs/S3/s3"; // adjust the path if needed
+// import { usePathname } from "next/navigation";
+// import { getColor } from "@/utils/getColorForSideMenu";
+import { uploadToS3 } from "@/APIs/S3/s3";
 
 
 interface AddMediaButtonProps {
@@ -11,7 +11,7 @@ interface AddMediaButtonProps {
 }
 
 const AddMediaButton: React.FC<AddMediaButtonProps> = ({ setUrlList }) => {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [disableButton, setDisableButton] = useState(false);
 
@@ -46,7 +46,7 @@ const AddMediaButton: React.FC<AddMediaButtonProps> = ({ setUrlList }) => {
         disabled={disableButton}
         onClick={handleClick}
         className={`z-10 fixed right-5 lg:right-20 bottom-36 sm:bottom-24 lg:bottom-10
-          ${disableButton ? "bg-gray-500" : `${getColor(pathname)[2]} ${getColor(pathname)[1]}`}
+          ${disableButton ? "bg-gray-500" : `hover:bg-blue-700 bg-blue-800`}
            py-1 px-2 lg:px-3 lg:py-2 rounded-xl 
           hover:cursor-pointer`}
       >

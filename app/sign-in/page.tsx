@@ -51,7 +51,7 @@ const SignInPage = () => {
           Enter
         </button>
         <p>
-          New here? register{" "}
+          Need an account? Register{" "}
           <Link href="/sign-up" className="underline text-blue-500">
             here
           </Link>

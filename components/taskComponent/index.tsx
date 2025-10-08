@@ -1,5 +1,9 @@
 import Image from "next/image";
 import { getColorForTask } from "@/utils/getColorForTaskCard";
+import {convertDateToDayMonthYear} from "@/utils/date";
+import { CiCalendar } from "react-icons/ci";
+import { CiClock2 } from "react-icons/ci";
+
 
 const TaskComponent = ({
   item,
@@ -17,14 +21,11 @@ const TaskComponent = ({
       <p className="text-gray-900 h-[100px] max-h-[100px] overflow-hidden">
         {item.description}
       </p>
-      <p className="text-xs text-gray-500">
-        Created at: {new Date(item.createdAt).toLocaleDateString()}
+      <p className="text-xs text-gray-500 flex gap-2 items-center">
+        <CiCalendar/> {convertDateToDayMonthYear(item.createdAt)}
       </p>
-      <p className="text-xs text-gray-500">
-        Updated at: {new Date(item.lastUpdated).toLocaleDateString()}
-      </p>
-      <p className="text-xs text-gray-500">
-        finsish by: {new Date(item.dueDate).toLocaleDateString()}
+      <p className="text-xs text-gray-500 flex gap-2 items-center">
+        <CiClock2/> {convertDateToDayMonthYear(item.dueDate)}
       </p>
       <div className="flex gap-1 self-end mt-auto">
         <button
@@ -52,16 +53,6 @@ const TaskComponent = ({
             height={20}
           />
         </button>
-        {/* {item.status !== "completed" && (
-          <button className="hover:cursor-pointer hover:bg-green-100 text-white w-fit p-1.5 rounded-lg">
-            <Image
-              src={"/icons/doneLogo.png"}
-              alt="Done Icon"
-              width={30}
-              height={30}
-            />
-          </button>
-        )} */}
       </div>
     </div>
   );
