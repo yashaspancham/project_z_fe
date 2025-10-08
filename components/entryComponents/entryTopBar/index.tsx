@@ -1,9 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import BulletLogo from "@/components/entryComponents/BulletLogo";
 import NumberedListLogo from "@/components/entryComponents/NumberedListLogo";
+import { CiImageOn } from "react-icons/ci";
+import { IoArrowBack } from "react-icons/io5";
+import { IoMdColorFilter } from "react-icons/io";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { FaRegSave } from "react-icons/fa";
+import { IoMdAdd } from "react-icons/io";
+
 
 const EntryTopBar = ({
   editor,
@@ -13,21 +19,22 @@ const EntryTopBar = ({
   setSideBarBool,
   sideMenuBool,
   setSideMenuBool,
-  handleConfirmDeletePopUp
+  handleConfirmDeletePopUp,
 }: any) => {
   const router = useRouter();
   return (
-    <div className="p-2 fixed z-10 flex flex-wrap gap-3 justify-between mb-4 mx-5 bg-white rounded-lg">
+    <div className=" shadow-md p-2.5 fixed z-10 flex flex-wrap gap-3 items-center justify-between mb-4 mx-5 bg-white rounded-lg">
       <button
-        className="p-2 bg-blue-800 hover:bg-blue-700 rounded-lg text-white hover:cursor-pointer"
+        className="p-2 bg-blue-800 hover:bg-blue-700 rounded-[50%] text-white hover:cursor-pointer flex gap-2 items-center"
         onClick={() => router.push("/entries")}
       >
-        Home
+        <IoArrowBack />
       </button>
+      <p className="text-gray-200 text-2xl">|</p>
       <button
         className={`${
           editor.isActive("bold") ? "bg-gray-200" : ""
-        } font-bold rounded-sm p-2`}
+        } font-bold rounded-sm p-2 hover:cursor-pointer hover:bg-gray-100`}
         onClick={() => editor.chain().focus().toggleBold().run()}
       >
         B
@@ -35,7 +42,7 @@ const EntryTopBar = ({
       <button
         className={`${
           editor.isActive("italic") ? "bg-gray-200" : ""
-        } italic rounded-sm p-2`}
+        } italic rounded-sm p-2 hover:cursor-pointer hover:bg-gray-100`}
         onClick={() => editor.chain().focus().toggleItalic().run()}
       >
         I
@@ -43,16 +50,17 @@ const EntryTopBar = ({
       <button
         className={`${
           editor.isActive("underline") ? "bg-gray-200" : ""
-        } underline rounded-sm p-2`}
+        } underline rounded-sm p-2 hover:cursor-pointer hover:bg-gray-100`}
         onClick={() => editor.chain().focus().toggleUnderline().run()}
       >
         U
       </button>
+      <p className="text-gray-200 text-2xl">|</p>
       <button
         onClick={() => editor?.chain().focus().toggleBulletList().run()}
         className={`${
           editor?.isActive("bulletList") ? "bg-gray-200" : ""
-        }  p-2 rounded-sm`}
+        }  p-2 rounded-sm hover:cursor-pointer hover:bg-gray-100`}
       >
         <BulletLogo />
       </button>
@@ -60,40 +68,43 @@ const EntryTopBar = ({
         onClick={() => editor?.chain().focus().toggleOrderedList().run()}
         className={`${
           editor?.isActive("orderedList") ? "bg-gray-200" : ""
-        }  p-2 rounded-sm`}
+        }  p-2 rounded-sm hover:cursor-pointer hover:bg-gray-100`}
       >
         <NumberedListLogo />
       </button>
+      <p className="text-gray-200 text-2xl">|</p>
       <button
-        className="hover:bg-gray-100 rounded-sm p-2"
+        className="hover:bg-gray-100 rounded-sm p-2 hover:cursor-pointer flex gap-2 items-center"
         onClick={() => {
           setSideBarBool(true);
         }}
       >
+        <CiImageOn />
         Image
       </button>
-
+      <p className="text-gray-200 text-2xl">|</p>
       <select
+        className="hover:cursor-pointer"
         onChange={(e) => {
           editor.chain().focus().setFontFamily(e.target.value).run();
         }}
         defaultValue=""
       >
-        <option value={ editor.getAttributes('textStyle').fontFamily ||""} disabled>
+        <option
+          value={editor.getAttributes("textStyle").fontFamily || ""}
+          disabled
+        >
           Default
         </option>
         <option value="">Default</option>
         <option value="arial">Arial</option>
-        {/* <option value="Georgia">Georgia</option> */}
         <option value="Courier New">Courier New</option>
         <option value="Inter">Inter</option>
         <option value="Merriweather">Merriweather</option>
         <option value="Roboto Mono">Roboto Mono</option>
       </select>
-
-
       <select
-        className="rounded p-1"
+        className="rounded p-1 hover:cursor-pointer"
         onChange={(e) => {
           const level = parseInt(e.target.value) as 1 | 2 | 3 | 4 | 5 | 6;
           if (level) {
@@ -115,14 +126,12 @@ const EntryTopBar = ({
           </option>
         ))}
       </select>
+      <p className="text-gray-200 text-2xl">|</p>
       <label className="inline-flex items-center gap-2 cursor-pointer">
-        <span
-          className="font-bold text-lg"
-          style={{
-            color: editor.getAttributes("textStyle").color || "#000",
-          }}
-        >
-          text Color
+        <span className="font-bold text-lg hover:bg-gray-100">
+          <IoMdColorFilter
+            color={editor.getAttributes("textStyle").color || "#000"}
+          />
         </span>
         <input
           type="color"
@@ -133,6 +142,7 @@ const EntryTopBar = ({
           }}
         />
       </label>
+      <p className="text-gray-200 text-2xl">|</p>
       <button
         disabled={disableSaveButtom}
         onClick={() => {
@@ -140,30 +150,25 @@ const EntryTopBar = ({
           handleSaveContentEntry();
         }}
         className={`p-2 ${
-          disableSaveButtom ? "bg-gray-300" : "bg-blue-800 hover:bg-blue-700"
-        } rounded-lg text-white hover:cursor-pointer`}
-      >
+          disableSaveButtom ? "bg-gray-300" : "bg-green-700 hover:bg-green-600"
+        } rounded-lg text-white hover:cursor-pointer flex gap-2 items-center`}
+      ><FaRegSave/>
         Save
       </button>
 
       <button
         className={`p-2 ${
-          sideMenuBool ? "bg-gray-300" : "bg-blue-800 hover:bg-blue-700"
-        } rounded-lg text-white hover:cursor-pointer`}
+          sideMenuBool ? "bg-gray-300" : "bg-yellow-600 hover:bg-yellow-500"
+        } rounded-lg text-white hover:cursor-pointer flex gap-2 items-center`}
         onClick={() => setSideMenuBool(true)}
-      >
+      ><IoMdAdd/>
         Add Task
       </button>
       <button
-      onClick={handleConfirmDeletePopUp}
-      className="hover:cursor-pointer hover:bg-gray-100 p-1 rounded-sm"
+        onClick={handleConfirmDeletePopUp}
+        className="hover:cursor-pointer hover:bg-gray-100 p-1 rounded-sm"
       >
-        <Image
-          src={"/icons/deleteEntryLogo.png"}
-          alt="delete Icon"
-          width={20}
-          height={20}
-        />
+        <RiDeleteBinLine color={"red"} size={25} />
       </button>
     </div>
   );

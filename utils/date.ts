@@ -8,6 +8,16 @@ export const convertDateToMonthAndYear = (date: string | undefined): string => {
     });
 };
 
+
+export const convertDateToDayMonthYear = (date: string | undefined): string => {
+    if (!date) return "N/A";
+    return new Date(date).toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+    });
+}
+
 export const convertDateToFullString = (date: string | undefined): string => {
     if (!date) return "N/A";
 

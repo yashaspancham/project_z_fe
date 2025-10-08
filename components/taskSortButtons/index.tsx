@@ -14,36 +14,32 @@ const TaskSortButtons = ({
   statusFilter,
   setStatusFilter,
 }: any) => {
-  const [sort, setSort] = React.useState("lastUpdated");
+  const [sort, setSort] = React.useState("-lastUpdated");
   const [loaded, setLoaded] = React.useState(false);
   const [disableSort, setDisableSort] = React.useState(false);
   const searchParams = useSearchParams();
+
   React.useEffect(() => {
     setLoaded(true);
     setSort(searchParams.get("sort") || "-lastUpdated");
   }, []);
 
-  const handleSort = (field: "lastUpdated" | "createdAt" | "dueDate") => {
-    let currentSort = "";
-    //with "-" >> descending(newest first) >> "˅" in UI
-    //no "-" >> ascending(oldest first) >> "^" in UI
-    if (sort !== field && sort !== `-${field}`) {
-      currentSort = `-${field}`; // default to descending
-    } else if (sort === field) {
-      currentSort = `-${field}`; // toggle to descending
-    } else if (sort === `-${field}`) {
-      currentSort = field; // toggle to ascending
-    }
+  const handleSort = (field: "lastUpdated" | "createdAt" | "dueDate", order?: "asc" | "desc") => {
+    let currentSort = order ? (order === "desc" ? `-${field}` : field) : `-${field}`;
 
     setDisableSort(true);
     setLoading(true);
+
     const pageStr = searchParams.get("page");
     const pageNumber = pageStr ? Number(pageStr) : 1;
     const search = searchParams.get("search") || "";
     const status = searchParams.get("status") || "";
+
     getTasks(pageNumber, currentSort, search, status).then((res) => {
-      setTasks(res.tasks);
-      setTaskDetails(res);
+      if (res.success) {
+        setTasks(res.tasks);
+        setTaskDetails(res);
+      }
       setSort(currentSort);
       setDisableSort(false);
       setLoading(false);
@@ -56,6 +52,7 @@ const TaskSortButtons = ({
       const pageNumber = pageStr ? Number(pageStr) : 1;
       const status = searchParams.get("status") || "";
       setLoading(true);
+
       getTasks(pageNumber, sort, e.target.value, status).then((res) => {
         if (res.success) {
           setTasks(res.tasks);
@@ -72,6 +69,7 @@ const TaskSortButtons = ({
     const pageNumber = pageStr ? Number(pageStr) : 1;
     const search = searchParams.get("search") || "";
     setLoading(true);
+
     getTasks(pageNumber, sort, search, status).then((res) => {
       if (res.success) {
         setTasks(res.tasks);
@@ -80,8 +78,17 @@ const TaskSortButtons = ({
       setDisableSort(false);
       setLoading(false);
     });
+
     setStatusFilter(status);
   };
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    const field = value.replace("-", "") as "lastUpdated" | "createdAt" | "dueDate";
+    const order = value.startsWith("-") ? "desc" : "asc";
+    handleSort(field, order);
+  };
+
   return (
     loaded && (
       <div className="w-full flex max-md:flex-col gap-2 justify-end items-center py-4 px-20">
@@ -89,7 +96,7 @@ const TaskSortButtons = ({
           searchString={searchString}
           setSearchString={setSearchString}
           handleSearchChange={handleSearchChange}
-          focusBorderCss={"focus:ring-purple-500"}
+          focusBorderCss={"focus:ring-blue-500"}
           placeholderString={"🔍 Search Tasks"}
         />
         <TaskFilter
@@ -97,77 +104,19 @@ const TaskSortButtons = ({
           setStatusFilter={setStatusFilter}
           handleStatusFilter={handleStatusFilter}
         />
-        <div className="flex gap-2">
-          <button
-            disabled={disableSort}
-            onClick={() => handleSort("dueDate")}
-            className={`flex justify-center items-center gap-1 text-xs md:text-sm 
-            p-2 rounded-lg hover:cursor-pointer
-      ${
-        sort === "dueDate" || sort === "-dueDate"
-          ? "bg-purple-800 hover:bg-purple-700 text-white"
-          : " hover:bg-purple-100"
-      } 
-        `}
-          >
-            dueDate
-            {(sort === "dueDate" || sort === "-dueDate") && (
-              <img
-                src="/icons/sortArrowLogo.png"
-                alt="sort arrow logo"
-                width={10}
-                height={10}
-                className={sort[0] === "-" ? `` : "scale-y-[-1]"}
-              />
-            )}
-          </button>
-          <button
-            disabled={disableSort}
-            onClick={() => handleSort("createdAt")}
-            className={`flex justify-center items-center gap-1 text-xs md:text-sm 
-            p-2 rounded-lg hover:cursor-pointer
-        ${
-          sort === "createdAt" || sort === "-createdAt"
-            ? "bg-purple-800 hover:bg-purple-700 text-white"
-            : " hover:bg-purple-100"
-        }
-        `}
-          >
-            createdAt
-            {(sort === "createdAt" || sort === "-createdAt") && (
-              <img
-                src="/icons/sortArrowLogo.png"
-                alt="sort arrow logo"
-                width={10}
-                height={10}
-                className={sort[0] === "-" ? `` : "scale-y-[-1]"}
-              />
-            )}
-          </button>
-          <button
-            disabled={disableSort}
-            onClick={() => handleSort("lastUpdated")}
-            className={`flex justify-center items-center gap-1 text-xs md:text-sm  
-            p-2 rounded-lg hover:cursor-pointer
-        ${
-          sort === "lastUpdated" || sort === "-lastUpdated"
-            ? "bg-purple-800 hover:bg-purple-700 text-white"
-            : " hover:bg-purple-100"
-        }
-        `}
-          >
-            lastUpdated
-            {(sort === "lastUpdated" || sort === "-lastUpdated") && (
-              <img
-                src="/icons/sortArrowLogo.png"
-                alt="sort arrow logo"
-                width={10}
-                height={10}
-                className={sort[0] === "-" ? `` : "scale-y-[-1]"}
-              />
-            )}
-          </button>
-        </div>
+        <select
+          disabled={disableSort}
+          value={sort}
+          onChange={handleSelectChange}
+          className="text-sm md:text-base border-gray-300 border-1 outline-none rounded-lg px-3 py-2 hover:cursor-pointer bg-white"
+        >
+          <option value="-dueDate">Due Date (Newest first)</option>
+          <option value="dueDate">Due Date (Oldest first)</option>
+          <option value="-createdAt">Created At (Newest first)</option>
+          <option value="createdAt">Created At (Oldest first)</option>
+          <option value="-lastUpdated">Last Updated (Newest first)</option>
+          <option value="lastUpdated">Last Updated (Oldest first)</option>
+        </select>
       </div>
     )
   );
