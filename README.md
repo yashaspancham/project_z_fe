@@ -1,4 +1,4 @@
-This will be the new frontend for Reflections
+This will be the frontend for Project_z
 
 # 📝 Diary Web App
 
