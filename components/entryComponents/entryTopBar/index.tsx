@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import BulletLogo from "@/components/entryComponents/BulletLogo";
 import NumberedListLogo from "@/components/entryComponents/NumberedListLogo";
@@ -22,6 +23,28 @@ const EntryTopBar = ({
   handleConfirmDeletePopUp,
 }: any) => {
   const router = useRouter();
+  // local state to force re-render when editor state changes
+  const [, setEditorTick] = useState(0);
+
+  useEffect(() => {
+    if (!editor) return;
+
+    const handle = () => {
+      setEditorTick((t) => t + 1);
+    };
+
+    // subscribe to editor updat
+    // es and selection changes so toolbar stays in sync
+    editor.on("update", handle);
+    editor.on("selectionUpdate", handle);
+    editor.on("transaction", handle);
+
+    return () => {
+      editor.off("update", handle);
+      editor.off("selectionUpdate", handle);
+      editor.off("transaction", handle);
+    };
+  }, [editor]);
   return (
     <div className=" shadow-md p-2.5 fixed z-10 flex flex-wrap gap-3 items-center justify-between mb-4 mx-5 bg-white rounded-lg">
       <button
